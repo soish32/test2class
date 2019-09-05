@@ -53,12 +53,13 @@ public class HkDao extends DataBase {
 				dto.setTitle(rs.getString(4));
 				dto.setContent(rs.getString(5));
 				dto.setRegdate(rs.getDate(6));
+				list.add(dto);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(rs, psmt, conn);
 		}
-
-
 		return list;
 	}
 
@@ -68,7 +69,7 @@ public class HkDao extends DataBase {
 		PreparedStatement psmt=null;
 
 		String sql="lNSERT lNTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE)"
-				+"VALUES(HKBOARD_SEQ.NEXTVAL,????SYSDATE)";
+				+"VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,?,SYSDATE)";
 
 		try {
 			conn=getConnection();

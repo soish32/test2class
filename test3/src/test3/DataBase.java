@@ -37,7 +37,7 @@ public class DataBase {
 	}
 
 	//6단계:DB닫기
-	public void close(ResultSet rs, PreparedStatement psmt,Connection conn) throws ClassNotFoundException {
+	public void close(ResultSet rs, PreparedStatement psmt,Connection conn) {
 		try {
 			if(rs!=null) {
 				rs.close();	

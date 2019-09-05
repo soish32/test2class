@@ -31,7 +31,7 @@ public class HkController extends HttpServlet {
 		if(command.equals("boardlist")) {
 			List<HkDto>list=dto.getAllList();
 			request.setAttribute("list", list);
-		request.getRequestDispatcher("boardlist.jsp");
+		request.getRequestDispatcher("boardlist.jsp").forward(request, response);
 		
 		}
 	}
