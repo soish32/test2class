@@ -18,6 +18,7 @@ public class HkDto {
 		this.seq = seq;
 		this.title = title;
 		this.content = content;
+		
 	}
 
 	 //생성자 오버로딩을 하게되면 default 생성자도 반드시 정의해줘야한다.-->HkDto dto=new HkDto();
@@ -102,9 +103,12 @@ public class HkDto {
 		return null;
 	}
 
+	
+	}
+
 
 		
-}
+
 
 
 	 

@@ -14,6 +14,9 @@ public class HkDao extends DataBase {
 
 	private ResultSet rs;
 	private List<HkDto> list;
+	private String url;
+	private String user;
+	private String password;
 
 	//생성자란:클래스의값을초기화 할때 사용한다.
 	//HkDao dao=new HkDao();
@@ -34,6 +37,9 @@ public class HkDao extends DataBase {
 
 	public List<HkDto> getAllList(){
 		List<HkDto> list=new ArrayList<HkDto>();
+		String url="jdbc:oracle:thin:@localhost:1521:xe";
+		String user="hk5";
+		String password="hk5";
 		Connection conn=null;//DB계정에 연결할 때 사용할 객체
 		PreparedStatement psmt=null;//쿼리 준비할때 사용할 객체
 		ResultSet rs=null;//DB결과를 받을 때 사용할 객체
@@ -42,6 +48,7 @@ public class HkDao extends DataBase {
 
 
 		try {
+			conn=DriverManager.getConnection(url,user,password);
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
 			rs=psmt.executeQuery();
@@ -65,6 +72,9 @@ public class HkDao extends DataBase {
 
 	public boolean insertBoard(HkDto dto ) {
 		int count=0;
+		String url="jdbc:oracle:thin:@localhost:1521:xe";
+		String user="hk5";
+		String password="hk5";
 		Connection conn=null;
 		PreparedStatement psmt=null;
 
@@ -72,28 +82,33 @@ public class HkDao extends DataBase {
 				+"VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,?,SYSDATE)";
 
 		try {
-			conn=getConnection();
+			conn=DriverManager.getConnection(url,user,password);
 			psmt=conn.prepareStatement(sql);
-			rs=psmt.executeQuery();	
-			while (rs.next()) {
-				HkDto dto1=new HkDto();
-				dto.setSeq(rs.getInt(1));
-				dto.setId(rs.getString(2));
-				dto.setName(rs.getString(3));
-				dto.setTitle(rs.getString(4));
-				dto.setContent(rs.getString(5));
-				dto.setRegdate(rs.getDate(6));
-				list.add(dto);
-				System.out.println(dto);
-
-			}
-
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4,dto.getContent());
+			count=psmt.executeUpdate();
 		} catch (SQLException e) {
+			System.out.println("JDBC:실패:"+getClass()+":"+"insertBoard()");
 			e.printStackTrace();
+		}finally {
+			try {
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 		}
-
-		return count>0?true:false;
+		return count>0?true:false;//삼항연산자
 	}
+
+
 	public HkDto getBoard(int seq) {
 		HkDto dto=new HkDto();
 		Connection conn=null;
@@ -182,7 +197,7 @@ public class HkDao extends DataBase {
 			try {
 				conn.rollback();
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
+				
 				e1.printStackTrace();
 			}
 			e.printStackTrace();
@@ -192,7 +207,6 @@ public class HkDao extends DataBase {
 		try {
 			conn.setAutoCommit(true);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//화면처리위해서 성공여부를확인
