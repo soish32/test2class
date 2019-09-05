@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>글추가하기</h1>
-	<form action="insertboard_after.jsp" method="post">
+	<form action="insertboard.jsp" method="post">
 		<input type="hidden" name="command" value="insert" />
 		<table border="1">
 			<col width="100px"><col width="300px">

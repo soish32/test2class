@@ -44,19 +44,9 @@ boolean isS=dao.insertBoard(new HkDto(id,name,title,content));
 	 	 		 					location.href="insertboard.jsp";
 	 	 		 		</script>
 	<%
- 
-
- 
- 
- 
- 
- 
  }
-
-
-
-
-%>
+ 		%>
+ 	
 
 </body>
 </html>

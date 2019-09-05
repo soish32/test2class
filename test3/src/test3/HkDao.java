@@ -9,9 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HkDao extends DataBase {
-	
 
-	
+
+
 	private ResultSet rs;
 	private List<HkDto> list;
 
@@ -19,19 +19,19 @@ public class HkDao extends DataBase {
 	//HkDao dao=new HkDao();
 	//3대예외처리 : java.sql,javaio,javanet	
 	public HkDao() {
-			  super();
+		super();
 	}
 
 	//글목록조회:select문실행: 반환값은 List타입(Dto담겨있음)
-//	public List<HkDto> list=new ArrayList<>();
-//	
-//	Connection conn=null;//DB계정에 연결할때 사용할 객체
-//	PreparedStatement psmt=null;
-//	ResultSet rs=null;//DB결과를 받을때 사용할 객체
-//	
-//	String sql="SELECT SEQ,ID, NAME,TITLE,CONTENT,REGDATE"
-//			+"FROM HKBOARD ORDER BY REGDATE DESC";
-	
+	//	public List<HkDto> list=new ArrayList<>();
+	//	
+	//	Connection conn=null;//DB계정에 연결할때 사용할 객체
+	//	PreparedStatement psmt=null;
+	//	ResultSet rs=null;//DB결과를 받을때 사용할 객체
+	//	
+	//	String sql="SELECT SEQ,ID, NAME,TITLE,CONTENT,REGDATE"
+	//			+"FROM HKBOARD ORDER BY REGDATE DESC";
+
 	public List<HkDto> getAllList(){
 		List<HkDto> list=new ArrayList<HkDto>();
 		Connection conn=null;//DB계정에 연결할 때 사용할 객체
@@ -39,8 +39,8 @@ public class HkDao extends DataBase {
 		ResultSet rs=null;//DB결과를 받을 때 사용할 객체
 		String sql="SELECT SEQ,ID, NAME,TITLE,CONTENT,REGDATE"
 				+"FROM HKBOARD ORDER BY REGDATE DESC";
-		
-		
+
+
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -57,19 +57,19 @@ public class HkDao extends DataBase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
-		
+
+
 		return list;
 	}
-	
+
 	public boolean insertBoard(HkDto dto ) {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		
+
 		String sql="lNSERT lNTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE)"
 				+"VALUES(HKBOARD_SEQ.NEXTVAL,????SYSDATE)";
-		
+
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -84,13 +84,13 @@ public class HkDao extends DataBase {
 				dto.setRegdate(rs.getDate(6));
 				list.add(dto);
 				System.out.println(dto);
-				
+
 			}
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return count>0?true:false;
 	}
 	public HkDto getBoard(int seq) {
@@ -100,7 +100,7 @@ public class HkDao extends DataBase {
 		ResultSet rs=null;
 		String sql= "SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE"
 				+"FROM HKBOARD WHERE SEQ=?";
-		
+
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -113,14 +113,14 @@ public class HkDao extends DataBase {
 				dto.setName(rs.getString(i++));
 				dto.setTitle(rs.getString(i++));
 				dto.setContent(rs.getString(i++));
-				
+
 			}
 		} catch (SQLException e) {
 			System.out.println("jdbc실패:"+getClass()+":getBoard()");
 			e.printStackTrace();
 		}
 		return dto;
-		
+
 	}
 	public boolean updateBoard(HkDto dto) {
 		int count =0;
@@ -128,7 +128,7 @@ public class HkDao extends DataBase {
 		PreparedStatement psmt=null;
 		String sql="UPDATE HKBOARD SET TITLE=?, CONTENT=? , REGDATE=SYSDATE"
 				+"WHERE SEQ=?";
-		
+
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -137,12 +137,12 @@ public class HkDao extends DataBase {
 			psmt.setInt(3, dto. getSeq());
 		} catch (SQLException e) {
 			e.printStackTrace();
-		
+
 		}
 		return count>0?true:false;
-		
+
 	}
-	
+
 	public boolean delBoard(int seq) {
 		int count=0;
 		Connection conn=null;
@@ -153,20 +153,20 @@ public class HkDao extends DataBase {
 			psmt= conn.prepareStatement(sql);
 			psmt.setInt(1, seq);
 			count=psmt.executeUpdate();
-			} catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return count>0?true:false;
 	}
-	
-	
+
+
 	public boolean muldle(String[]seqs) {
 		boolean isS=true;
 		int[]count=null;
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
-		
+
 		try {
 			conn=getConnection();
 			conn.setAutoCommit(false);
@@ -178,19 +178,39 @@ public class HkDao extends DataBase {
 			count=psmt.executeBatch();
 			conn.commit();
 		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+
+		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//화면처리위해서 성공여부를확인
+		for(int i=0;i<count.length;i++) {
+			isS=false;
+			break;
+		}
 		return isS;
+
 	}
 }
-		
-		
-	
-
-			
 
 
 
-	
-	
+
+
+
+
+
+
+
 

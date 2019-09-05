@@ -9,13 +9,14 @@
 <head>
 <meta http-equiv="COntent-Type" content="text/html; charsetUTF-8">
 
-<title>Insert title here</title>
+<title>게시글상세보기</title>
 </head>
 <%
 	int seq=Integer.parseInt(request.getParameter("seq"));
 	HkDao dao=new HkDao();
 	HkDto dto=dao.getBoard(seq);
 	
+
 %>
 <body>
 	<h1>게시글상세보기</h1>
@@ -34,10 +35,6 @@
 		</tr>
 		<tr>
 			<th>작성일</th>
-			<td><%=dto.getRegdate()%></td>
-		</tr>
-		<tr>
-			<th>제목</th>
 			<td><%=dto.getTitle()%></td>
 		</tr>
 		<tr>
@@ -52,15 +49,12 @@
 		</tr>
 	</table>
 	<script type="text/javascript">
-			  //글삭제하기	 
-			function delBoard(seq){
-				location.href="delboard.jsp seq="+seq;
-			  }
-			  	//글수정하기
-				function updateBoard(seq){
-					location.href="boardupdate.jsp? seq="+seq;//get방식으로 파라미터전송
-		     }
-			
+		  	function delBoard(seq){
+		  	location.href="delboard.jsp?seq="+seq;
+		  	}
+		  	function updateBoard(seq){
+		  	location.href="boardupdate.jsp?seq="+seq;
+		  	}
 </script>
 </body>
 </html>

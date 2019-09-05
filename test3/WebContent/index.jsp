@@ -6,10 +6,9 @@
 <html>
 <head>
 <meta http-equiv="COntent-Type" content= "text/html; charsetUTF-8">
-
 <title>메인화면</title>
 </head>
 <body>
-<a href="Hk.Controller.do?command=boardlist">글목록조회</a>
+<a href="boardlist.jsp">글목록조회</a>
 </body>
 </html>
