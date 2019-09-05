@@ -49,9 +49,11 @@ public class HkDao extends DataBase {
 
 		try {
 			conn=DriverManager.getConnection(url,user,password);
-			conn=getConnection();
+			System.out.println("2단계:DB연결성공");
 			psmt=conn.prepareStatement(sql);
+			System.out.println("3단계:쿼리준비연결성공");
 			rs=psmt.executeQuery();
+			System.out.println("4단계:쿼리실행성공");
 			while(rs.next()) {
 				HkDto dto=new HkDto();
 				dto.setSeq(rs.getInt(1));
@@ -61,11 +63,28 @@ public class HkDao extends DataBase {
 				dto.setContent(rs.getString(5));
 				dto.setRegdate(rs.getDate(6));
 				list.add(dto);
+				System.out.println(dto);
 			}
+			System.out.println("5단계:쿼리결과받기성공");
 		} catch (SQLException e) {
+			System.out.println("JDBC:실패:"+getClass()+":"+"getAllList()");
 			e.printStackTrace();
 		}finally {
-			close(rs, psmt, conn);
+			try {
+				if(rs!=null) {
+					rs.close();
+				}
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+					conn.close();
+				}
+				System.out.println("6단계:DB닫기성공");
+			} catch (SQLException e) {
+				System.out.println("6단계:DB닫기실패");
+				e.printStackTrace();
+			}
 		}
 		return list;
 	}
@@ -171,6 +190,8 @@ public class HkDao extends DataBase {
 			count=psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally {
+			close(null,psmt,conn);
 		}
 		return count>0?true:false;
 	}
