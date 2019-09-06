@@ -11,7 +11,7 @@
 </head>
 <body>
 	<h1>글추가하기</h1>
-	<form action="insertboard.jsp" method="post">
+	<form action="HkController.do" method="post">
 		<input type="hidden" name="command" value="insert" />
 		<table border="1">
 			<col width="100px"><col width="300px">
@@ -34,7 +34,7 @@
 			<tr>
 			<td colspan="2">
 				<input type="submit" value="글등록"/><td>
-				<input type="submit" value="목록"/></td>
+				<input type="button" value="목록"/></td>
 				
 				
 			</tr>

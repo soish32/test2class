@@ -43,8 +43,8 @@ public class HkDao extends DataBase {
 		Connection conn=null;//DB계정에 연결할 때 사용할 객체
 		PreparedStatement psmt=null;//쿼리 준비할때 사용할 객체
 		ResultSet rs=null;//DB결과를 받을 때 사용할 객체
-		String sql="SELECT SEQ,ID, NAME,TITLE,CONTENT,REGDATE"
-				+"FROM HKBOARD ORDER BY REGDATE DESC";
+		String sql=" SELECT SEQ,ID, NAME,TITLE,CONTENT,REGDATE "
+				+" FROM HKBOARD ORDER BY REGDATE DESC ";
 
 
 		try {

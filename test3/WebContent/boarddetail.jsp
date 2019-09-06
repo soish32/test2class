@@ -12,10 +12,8 @@
 <title>게시글상세보기</title>
 </head>
 <%
-	int seq=Integer.parseInt(request.getParameter("seq"));
-	HkDao dao=new HkDao();
-	HkDto dto=dao.getBoard(seq);
 	
+HkDto dto=(HkDto)request.getAttribute("dto");
 
 %>
 <body>

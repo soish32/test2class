@@ -34,6 +34,7 @@
 	<script type="text/javascript">
    	 		   alert("해당글 삭제 실패")
    	 		   location.href="boarddetail.jsp?"seq=<%=seq%>";
+   	 		  
    	 		   
    	 		   
    	 		  </script>
