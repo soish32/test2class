@@ -197,7 +197,7 @@ public class HkDao extends DataBase {
 	}
 
 
-	public boolean muldle(String[]seqs) {
+	public boolean muldel(String[]seqs) {
 		boolean isS=true;
 		int[]count=null;
 		Connection conn=null;
@@ -241,6 +241,9 @@ public class HkDao extends DataBase {
 
 	
 	}
+
+	
+	
 
 
 

@@ -2,9 +2,10 @@ package test3;
 
 
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +19,15 @@ import javax.servlet.http.HttpServletResponse;
 
 
 
+
+
+
+
 @WebServlet("/HkController.do")
 public class HkController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private HkDao indexBoard;
+
+	
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
@@ -70,21 +76,56 @@ public class HkController extends HttpServlet {
 						jsForward("HkCotroller.do?command=boarddetail"+seq, "해당글삭제실패",response);
 						
 				}
+		}else if(command.equals("updateform")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			HkDto dto=dao.getBoard(seq);
+			request.setAttribute("dto", dto);
+//					pageContext.forward("boardupdate.jsp");
+			dispatch("boardupdate.jsp",request,response);
+		}else if(command.equals("boardupate")) {
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			
+			boolean isS=dao.updateBoard(new HkDto(seq,title,content));
+			if(isS) {
+					  jsForward("HkController.do?command=boarddetail&seq="+seq,"글수정성공",response);
+			}else {
+					  jsForward("HkController.do?command=boardupdate&seq="+seq,"글수정실패",response);
+					  
+			}
+		}else if(command.contentEquals("muldel")) {
+			String[] seqs=request.getParameterValues("chk");
+			if(seqs==null||seqs.length==0) {
+					 jsForward("HkController.do?command=boardlist","최소하나이상체크하세요",response);
+					}else {
+							boolean isS=dao.muldel(seqs);
+							if(isS) {
+									  jsForward("HkController.do?comman=boardList","여러글을 삭제합니다.",response);
+									  jsForward("HkCotroller.do?command=boardList","여러글삭제실패.",response);
+									  
+							}
+					}
+			
 		}
 			
-
-		
-	}//doPost()끝
+}//doPost()끝
 
 
-	private void jsForward(String string, String string2, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
+	private void jsForward(String url, String msg,  HttpServletResponse response)throws IOException {
+		String str="<script type='text/javascript'>"
+				+"alert('"+msg+"');"
+				+"location.href='"+url+"';"
+				+"</script>";
+				
 	}
 
 
-	private void dispatch(String string, HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
+	private void dispatch(String url, HttpServletRequest request
+			,HttpServletResponse response)throws ServletException,IOException{
+		RequestDispatcher dispatch=request.getRequestDispatcher(url);
+		dispatch.forward(request, response);
+					
 		
 	}
 
