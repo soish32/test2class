@@ -238,6 +238,11 @@ public class HkDao extends DataBase {
 		return isS;
 
 	}
+
+	public List<HkDto> getParameter(String string) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 
