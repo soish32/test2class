@@ -33,6 +33,7 @@ public class HkController extends HttpServlet {
 			request.setAttribute("list", list);
 		request.getRequestDispatcher("boardlist.jsp").forward(request, response);
 		
+		
 		}
 	}
 

@@ -62,7 +62,10 @@
 
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="수정완료" /></td>
+			<td colspan="2">
+				<input type="submit" value="수정완료" />
+				<button type="button" onclick="location.href='HkController.do?command=boardlist">글목록</button>
+				</td>
 			</tr>
 
 

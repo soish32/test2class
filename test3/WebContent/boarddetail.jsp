@@ -43,8 +43,10 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button onclick="updateBoard(<%=dto.getSeq()%>)">수정</button>
-				<button onclick="delBoard(<%=dto.getSeq()%>)">삭제</button>
+			<button onclick="replyForm()">답글</button>
+			<button onclick="updateBoard(<%=dto.getSeq()%>)">수정</button>
+			<button onclick="delBoard(<%=dto.getSeq()%>)">삭제</button>
+		
 			</td>
 		</tr>
 	</table>

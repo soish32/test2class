@@ -32,7 +32,11 @@
 				<td><textarea rows="10" cols="60" name="content"required="required"></textarea></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="글추가" /></td>
+			<td colspan="2">
+				<input type="submit" value="글등록"/><td>
+				<input type="submit" value="목록"/></td>
+				
+				
 			</tr>
 
 		</table>

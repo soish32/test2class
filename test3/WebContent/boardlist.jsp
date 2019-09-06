@@ -72,7 +72,8 @@
 			%>
 			<tr>
 				<td colspan="5">
-					<input type="submit" value="삭제" />
+				<a href="insertboard.jsp">글추가</a>
+					<input type="submit" value="글삭제" />
 			</td>
 			</tr>
 
