@@ -97,8 +97,8 @@ public class HkDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 
-		String sql="lNSERT lNTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE)"
-				+"VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,?,SYSDATE)";
+		String sql=" INSERT INTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE) "
+				+" VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,?,SYSDATE) ";
 
 		try {
 			conn=DriverManager.getConnection(url,user,password);
@@ -133,8 +133,8 @@ public class HkDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql= "SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE"
-				+"FROM HKBOARD WHERE SEQ=?";
+		String sql= " SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE "
+				+" FROM HKBOARD WHERE SEQ=?";
 
 		try {
 			conn=getConnection();
@@ -161,8 +161,8 @@ public class HkDao extends DataBase {
 		int count =0;
 		Connection conn =null;
 		PreparedStatement psmt=null;
-		String sql="UPDATE HKBOARD SET TITLE=?, CONTENT=? , REGDATE=SYSDATE"
-				+"WHERE SEQ=?";
+		String sql=" UPDATE HKBOARD SET TITLE=?, CONTENT=? , REGDATE=SYSDATE "
+				+" WHERE SEQ=?";
 
 		try {
 			conn=getConnection();
@@ -182,7 +182,7 @@ public class HkDao extends DataBase {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
+		String sql=" DELETE FROM HKBOARD WHERE SEQ=?";
 		try {
 			conn= getConnection();
 			psmt= conn.prepareStatement(sql);
@@ -202,7 +202,7 @@ public class HkDao extends DataBase {
 		int[]count=null;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
+		String sql=" DELETE FROM HKBOARD WHERE SEQ=?";
 
 		try {
 			conn=getConnection();
@@ -239,11 +239,9 @@ public class HkDao extends DataBase {
 
 	}
 
-	public List<HkDto> getParameter(String string) {
-		// TODO Auto-generated method stub
-		return null;
+	
 	}
-}
+
 
 
 
