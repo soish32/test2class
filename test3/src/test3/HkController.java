@@ -55,11 +55,38 @@ public class HkController extends HttpServlet {
 				response.sendRedirect("insertboard.jsp");
 			}
 			
+		}else if (command.equals("boarddetail")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			HkDto dto=dao.getBoard(seq);
+			request.setAttribute("dto", dto);
+			//pageContext.forward("boarddetail.jsp");
+			dispatch("boarddtail.jsp", request,response);
+		}else if(command.equals("delboard")) {
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			boolean isS= dao.delBoard(seq);
+			if(isS) {
+					  jsForward("HkCotroller.do?command=boardlist","해당글을삭제합니다.",response);
+				}else {
+						jsForward("HkCotroller.do?command=boarddetail"+seq, "해당글삭제실패",response);
+						
+				}
 		}
 			
 
 		
 	}//doPost()끝
+
+
+	private void jsForward(String string, String string2, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	private void dispatch(String string, HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+		
+	}
 
 
 	
