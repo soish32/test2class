@@ -66,7 +66,7 @@ public class HkController extends HttpServlet {
 			HkDto dto=dao.getBoard(seq);
 			request.setAttribute("dto", dto);
 			//pageContext.forward("boarddetail.jsp");
-			dispatch("boarddtail.jsp", request,response);
+			dispatch("boarddetail.jsp", request,response);
 		}else if(command.equals("delboard")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			boolean isS= dao.delBoard(seq);
