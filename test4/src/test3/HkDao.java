@@ -29,8 +29,8 @@ public class HkDao extends DataBase {
 		ResultSet rs=null;
 		String sql="SELECT SEQ, ID , NAME, TITLE  CONTET,REGDATE,  "
 				+"FORM HKBOARD ORDER BY REGDATE DESC";
-				
-		
+
+
 		try {
 			conn=DriverManager.getConnection(url,user,password);
 			System.out.println("2단계:DB연결성공");
@@ -57,13 +57,13 @@ public class HkDao extends DataBase {
 		}finally {
 			try {
 				if(rs!=null) {
-						rs.close();
+					rs.close();
 				}
 				if(psmt!=null) {
-						  psmt.close();
+					psmt.close();
 				}
 				if(conn!=null) {
-						  conn.close();
+					conn.close();
 				}
 				System.out.println("6단계:DB닫기성공");
 			} catch (SQLException e) {
@@ -81,10 +81,10 @@ public class HkDao extends DataBase {
 		String password="hk5";
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		
+
 		String sql="INSERT INTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE) "
 				+"VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,SYSDATE)";
-		
+
 		try {
 			conn=DriverManager.getConnection(url,user,password);
 			psmt=conn.prepareStatement(sql);
@@ -102,7 +102,7 @@ public class HkDao extends DataBase {
 					psmt.close();
 				}
 				if(conn!=null) {
-						conn.close();
+					conn.close();
 				}
 			} catch (SQLException e) {
 				e.printStackTrace();
@@ -119,7 +119,7 @@ public class HkDao extends DataBase {
 		ResultSet rs=null;
 		String sql="SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE"
 				+"FROM HKBOARD WHERE SEQ=?";
-		
+
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -134,23 +134,54 @@ public class HkDao extends DataBase {
 				dto.setRegdate(rs.getDate(i++));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			System.out.println("jdbc실패:"+getClass()+"getBoard()");
 			e.printStackTrace();
+		}finally {
+			close(null,psmt,conn);
 		}
-		
+
 		return dto;
 
 	}
 	public boolean updateBoard(HkDto dto) {
 		int count =0;
-		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		String sql=" UPDATE HKBOARD SET TITLE=?, CONTENT=?, REGDATE=SYSDATE "
+				+"WHERE SEQ=?";
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, dto.getTitle());
+			psmt.setString(2, dto.getContent());
+			psmt.setInt(3, dto.getSeq());
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(null,psmt,conn);
+
+		}
 		return count>0?true:false;
 
 	}
 
 	public boolean delBoard(int seq) {
 		int count=0;
-		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
+
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(null,psmt,conn);
+		}
 		return count>0?true:false;
 	}
 
@@ -158,16 +189,50 @@ public class HkDao extends DataBase {
 	public boolean muldel(String[]seqs) {
 		boolean isS=true;
 		int[]count=null;
-		
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
+		try {
+			conn=getConnection();
+			conn.setAutoCommit(false);
+			psmt=conn.prepareStatement(sql);
+			for(int i=0;i<seqs.length;i++) {
+				psmt.setString(1, seqs[i]);
+				psmt.addBatch();
+			}
+			count=psmt.executeBatch();
+			conn.commit();
+		} catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally {
+
+		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		for(int i=0;i<count.length;i++) {
+			if(count[i]!=-2) {
+				isS=false;
+				break;
+			}
+		}
 		return isS;
 
 	}
 
-	
+
 }//class종료
 
-	
-	
+
+
 
 
 
