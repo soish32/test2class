@@ -30,7 +30,7 @@ public class DataBase {
 		try {
 			conn=DriverManager.getConnection(url,user,password);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 		}
 		return conn;
@@ -52,7 +52,6 @@ public class DataBase {
 
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

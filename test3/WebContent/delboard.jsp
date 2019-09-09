@@ -12,32 +12,29 @@
 <title></title>
 </head>
 <body>
-	<%
+<%	
 	int seq=Integer.parseInt(request.getParameter("seq"));
-    HkDao dao=new HkDao();
-    boolean isS=dao.delBoard(seq);
-    if(isS){
-    	
-    }
-
-%>
+	HkDao dao=new HkDao();
+	boolean isS=dao.delBoard(seq);
+	if(isS){
+			 %>
 	<script type="text/javascript">
-     		 alert("해당글을 삭제합니다.");
-     		 location.href="boardlist.jsp";
-     </script>
-	<%
-     
+			 alert("해당글을 삭제합니당.");
+			 location.href="boardlist.jsp";
+	 </script>
+	 <%
 
-     
-    
-   	 %>
-	<script type="text/javascript">
-   	 		   alert("해당글 삭제 실패")
-   	 		   location.href="boarddetail.jsp?"seq=<%=seq%>";
-   	 		   }
-   	  </script>
-	<%
-		
-   		%>
+	}else{
+
+	 %>
+	 <script type="text/javascript">
+	 		 alert("해당글 삭제실패!!");
+	 		 location.href="boarddetail.jsp?seq=<%=seq%>";
+	 </script>
+	 <%
+	}
+	 
+	 
+	 %>
 </body>
 </html>

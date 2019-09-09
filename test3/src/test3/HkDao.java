@@ -172,9 +172,12 @@ public class HkDao extends DataBase {
 			psmt.setString(1, dto.getTitle());
 			psmt.setString(2, dto.getContent());
 			psmt.setInt(3, dto. getSeq());
+			count=psmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 
+		}finally {
+			close(null, psmt, conn);
 		}
 		return count>0?true:false;
 
@@ -232,10 +235,13 @@ public class HkDao extends DataBase {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		//화면처리위해서 성공여부를확인
+		//화면처리위해서 성공여부를확인 count[-2,-2,-2]
 		for(int i=0;i<count.length;i++) {
-			isS=false;
-			break;
+			if(count[i]!=-2) {
+				isS=false;				
+				break;
+			}
+			
 		}
 		return isS;
 

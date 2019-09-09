@@ -71,9 +71,9 @@ public class HkController extends HttpServlet {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			boolean isS= dao.delBoard(seq);
 			if(isS) {
-					  jsForward("HkCotroller.do?command=boardlist","해당글을삭제합니다.",response);
+					  jsForward("HkController.do?command=boardlist","해당글을삭제합니다.",response);
 				}else {
-						jsForward("HkCotroller.do?command=boarddetail"+seq, "해당글삭제실패",response);
+						jsForward("HkController.do?command=boarddetail"+seq, "해당글삭제실패",response);
 						
 				}
 		}else if(command.equals("updateform")) {
@@ -82,7 +82,7 @@ public class HkController extends HttpServlet {
 			request.setAttribute("dto", dto);
 //					pageContext.forward("boardupdate.jsp");
 			dispatch("boardupdate.jsp",request,response);
-		}else if(command.equals("boardupate")) {
+		}else if(command.equals("boardupdate")) {
 			String title=request.getParameter("title");
 			String content=request.getParameter("content");
 			int seq=Integer.parseInt(request.getParameter("seq"));
@@ -91,7 +91,7 @@ public class HkController extends HttpServlet {
 			if(isS) {
 					  jsForward("HkController.do?command=boarddetail&seq="+seq,"글수정성공",response);
 			}else {
-					  jsForward("HkController.do?command=boardupdate&seq="+seq,"글수정실패",response);
+					  jsForward("HkController.do?command=updateform&seq="+seq,"글수정실패",response);
 					  
 			}
 		}else if(command.contentEquals("muldel")) {
@@ -104,7 +104,7 @@ public class HkController extends HttpServlet {
 						  jsForward("HkController.do?command=boardlist","여러글을 삭제합니다.",response);
 						  
 				}else {
-						  jsForward("HkCotroller.do?command=boardlist","여러글삭제실패.",response);
+						  jsForward("HkController.do?command=boardlist","여러글삭제실패.",response);
 					
 				}
 			}
@@ -119,7 +119,8 @@ public class HkController extends HttpServlet {
 				+"alert('"+msg+"');"
 				+"location.href='"+url+"';"
 				+"</script>";
-				
+		PrintWriter pw=response.getWriter();
+		pw.print(str);
 	}
 
 

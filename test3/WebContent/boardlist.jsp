@@ -33,7 +33,7 @@
 <body>
 	<h1>게시판글목록조회</h1>
 	<form action="HkController.do" method="post">
-		<input type="hidden" name="command" value="muldel" />
+	<input type="hidden" name="command" value="muldel"/>
 		<table border="1">
 			<col width="50px">
 			<col width="50px">
@@ -62,7 +62,7 @@
 				<td><input type="checkbox" name="chk" value="<%=dto.getSeq()%>" /></td>
 				<td><%=dto.getSeq() %></td>
 				<td><%=dto.getId()%></td>
-				<td><a href="HkController.do?command=boarddetail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
+				<td><a href="HkController.jsp?command=boarddetail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
 				<td><%=dto.getRegdate()%></td>
 			</tr>
 			<%
@@ -73,7 +73,7 @@
 			<tr>
 				<td colspan="5">
 				<a href="insertboard.jsp">글추가</a>
-					<input type="submit" value="글삭제" />
+					<input type="submit" value="삭제" />
 			</td>
 			</tr>
 

@@ -22,8 +22,9 @@
 %>
 <body>
 	<h1>게시글수정하기</h1>
-	<form action="boardupdate_after.jsp" method="post">
-		<input type="hidden" name="seq" value="<%=dto.getSeq()%>" />
+	<form action="HkController.do" method="post">
+	<input type="hidden"name="command"value="boardupdate">
+		<input type="hidden" name="seq"  value="<%=dto.getSeq()%>" />
 		<table border="1">
 			<tr>
 				<th>번호
@@ -41,7 +42,7 @@
 				<td><%=dto.getName()%>
 			</tr>
 			<tr>
-				<th>번호
+				<th>
 				<th>
 				<td><%=dto.getSeq()%>
 			</tr>
@@ -53,17 +54,17 @@
 			<tr>
 				<th>제목
 				<th>
-				<td><input type="text" name="tilte" value="<%=dto.getTitle()%>" /></td>
+				<td><input type="text" name="title" value="<%=dto.getTitle()%>" /></td>
 			</tr>
 			<tr>
 				<th>내용
 				<th>
-				<td><textarea rows="10" cols="60" name="contnet"><%=dto.getContent()%></textarea></td>
+				<td><textarea rows="10" cols="60" name="content"><%=dto.getContent()%></textarea></td>
 
 			</tr>
 			<tr>
 			<td colspan="2">
-				<input type="submit" value="수정완료" />
+				<input type="submit"  value="수정완료" />
 				<button type="button" onclick="location.href='HkController.do?command=boardlist">글목록</button>
 				</td>
 			</tr>
