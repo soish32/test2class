@@ -41,6 +41,7 @@ public class HkController extends HttpServlet {
 		HkDao dao=new HkDao();
 		
 		if(command.equals("boardlist")) { //글목록 보여주기
+			System.out.println("왜안돼??");
 			List<HkDto>list=dao.getAllList();
 			request.setAttribute("list", list);
 			request.getRequestDispatcher("boardlist.jsp").forward(request, response);
@@ -73,7 +74,7 @@ public class HkController extends HttpServlet {
 			if(isS) {
 					  jsForward("HkController.do?command=boardlist","해당글을삭제합니다.",response);
 				}else {
-						jsForward("HkController.do?command=boarddetail"+seq, "해당글삭제실패",response);
+						jsForward("HkController.do?command=boarddetail&seq="+seq, "해당글삭제실패",response);
 						
 				}
 		}else if(command.equals("updateform")) {

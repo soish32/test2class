@@ -41,7 +41,7 @@ HkDto dto=(HkDto)request.getAttribute("dto");
 		</tr>
 		<tr>
 			<td colspan="2">
-			<button onclick="updateBoard(<%=dto.getSeq()%>)">수정</button>
+			<button onclick="boardupdate(<%=dto.getSeq()%>)">수정</button>
 			<button onclick="delBoard(<%=dto.getSeq()%>)">삭제</button>
 			
 		
@@ -50,10 +50,10 @@ HkDto dto=(HkDto)request.getAttribute("dto");
 	</table>
 	<script type="text/javascript">
 		  	function delBoard(seq){
-		  	location.href="delboard.jsp?seq="+seq;
+		  	location.href="HkController.do?command=delboard&seq="+seq;
 		  	}
 		  	function updateBoard(seq){
-		  	location.href="boardupdate.jsp?seq="+seq;
+		  	location.href="HkController.do?command=boardupdate&seq="+seq;
 		  	}
 </script>
 </body>

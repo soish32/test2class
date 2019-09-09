@@ -62,7 +62,7 @@
 				<td><input type="checkbox" name="chk" value="<%=dto.getSeq()%>" /></td>
 				<td><%=dto.getSeq() %></td>
 				<td><%=dto.getId()%></td>
-				<td><a href="HkController.jsp?command=boarddetail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
+				<td><a href="HkController.do?command=boarddetail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
 				<td><%=dto.getRegdate()%></td>
 			</tr>
 			<%
