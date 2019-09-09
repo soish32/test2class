@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.application.Preloader.PreloaderNotification;
+
 public class HkDao extends DataBase {
 
 	private String sql;
@@ -74,13 +76,67 @@ public class HkDao extends DataBase {
 
 	public boolean insertBoard(HkDto dto ) {
 		int count=0;
+		String url="jdbc:oracle:thin@localhost:1521:xe";
+		String user="hk5";
+		String password="hk5";
+		Connection conn=null;
+		PreparedStatement psmt=null;
 		
+		String sql="INSERT INTO HKBOARD(SEQ,ID,NAME,TITLE,CONTENT,REGDATE) "
+				+"VALUES(HKBOARD_SEQ.NEXTVAL,?,?,?,SYSDATE)";
+		
+		try {
+			conn=DriverManager.getConnection(url,user,password);
+			psmt=conn.prepareStatement(sql);
+			psmt.setString(1, dto.getId());
+			psmt.setString(2, dto.getName());
+			psmt.setString(3, dto.getTitle());
+			psmt.setString(4, dto.getContent());
+			count=psmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("jdbc:실패:"+getClass()+":"+"insertBoard()");
+			e.printStackTrace();
+		}finally {
+			try {
+				if(psmt!=null) {
+					psmt.close();
+				}
+				if(conn!=null) {
+						conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
 		return count>0?true:false;//삼항연산자
 	}
 
 
 	public HkDto getBoard(int seq) {
 		HkDto dto=new HkDto();
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		ResultSet rs=null;
+		String sql="SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE"
+				+"FROM HKBOARD WHERE SEQ=?";
+		
+		try {
+			conn=getConnection();
+			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
+			rs=psmt.executeQuery();
+			while(rs.next()) {
+				int i=1;
+				dto.setSeq(rs.getInt(i++));
+				dto.setId(rs.getString(i++));
+				dto.setName(rs.getString(i++));
+				dto.setTitle(rs.getString(i++));
+				dto.setRegdate(rs.getDate(i++));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return dto;
 

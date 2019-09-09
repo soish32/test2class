@@ -49,9 +49,18 @@ public class HkController extends HttpServlet {
 			}
 		}else if (command.equals("boarddetail")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
-			
+			HkDto dto=dao.getBoard(seq);
+			request.setAttribute("dto", dto);
+			//pageConetext.forward("boarddetail.jsp");
 		}else if(command.equals("delboard")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
+			boolean isS=dao.delBoard(seq);
+			if(isS) {
+						jsForward("HkController.do?command=boardlist","해당글을삭제합니다.",response);
+			}else {
+						jsForward("HkController.do?command=boarddetail&seq="+seq,"해당글을삭제실패.",response);
+						
+			}
 			
 		}else if(command.equals("updateform")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
