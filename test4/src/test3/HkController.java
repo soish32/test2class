@@ -22,20 +22,31 @@ public class HkController extends HttpServlet {
 	protected  void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		
 		String command=request.getParameter("command");
-		
 		HkDao dao=new HkDao();
 		
 		if(command.equals("boardlist")) { //글목록 보여주기
-			
+		System.out.println("왜안될까?");
+		List<HkDto>list=dao.getAllList();
+		request.setAttribute("list", list);
+		request.getRequestDispatcher("boardlist.jsp").forward(request,response);
 		}else if(command.equals("insert")) {
 			//여기서는 전송된 4개의 파라미터 id, name, title, content를 받는 코드 작성
+			String id= request.getParameter("id");
+			String name = request.getParameter("name");
+			String title=request.getParameter("title");
+			String content=request.getParameter("content");
+			
+			
 			
 			//4개의 파라미터를 이용해서 dao에 insert 메서드 실행----> 그래야 디비에 게시글이 저장됨
-			
+			boolean isS=dao.insertBoard(new HkDto (id,name,title,content));
 			//그리고 글목록 페이지로 이동하는 코드 작성
-			
+			if(isS) {
+				response.sendRedirect("HkController.do?command=boardlist");
+			}else {
+				response.sendRedirect("insertboard.jsp");
+			}
 		}else if (command.equals("boarddetail")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			
