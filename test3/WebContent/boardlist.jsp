@@ -51,7 +51,7 @@
 				if(list==null||list.size()==0){
 				%>
 			<tr>
-				<td colspan="4" style="text-align: center;">----작성된글이없습니다,---</td>
+				<td colspan="5" style="text-align: center;">----작성된글이없습니다,---</td>
 			</tr>
 			<%
 			}else{

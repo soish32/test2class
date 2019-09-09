@@ -52,8 +52,8 @@ HkDto dto=(HkDto)request.getAttribute("dto");
 		  	function delBoard(seq){
 		  	location.href="HkController.do?command=delboard&seq="+seq;
 		  	}
-		  	function updateBoard(seq){
-		  	location.href="HkController.do?command=boardupdate&seq="+seq;
+		  	function boardupdate(seq){
+		  	location.href="HkController.do?command=updateform&seq="+seq;
 		  	}
 </script>
 </body>

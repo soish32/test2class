@@ -15,10 +15,8 @@
 
 <title>게시글수정하기</title>
 </head>
-<%
-	int seq = Integer.parseInt(request.getParameter("seq"));
-	HkDao dao = new HkDao();
-	HkDto dto = dao.getBoard(seq);
+<% // request 스코프에 담겨져 있는 DTO를 꺼낸다
+	HkDto dto=(HkDto)request.getAttribute("dto");
 %>
 <body>
 	<h1>게시글수정하기</h1>
