@@ -148,11 +148,13 @@ public class HkDao extends DataBase {
 				dto.setName(rs.getString(i++));
 				dto.setTitle(rs.getString(i++));
 				dto.setContent(rs.getString(i++));
-
+				dto.setRegdate(rs.getDate(i++));
 			}
 		} catch (SQLException e) {
 			System.out.println("jdbc실패:"+getClass()+":getBoard()");
 			e.printStackTrace();
+		}finally {
+			close(rs, psmt, conn);
 		}
 		return dto;
 

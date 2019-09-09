@@ -24,7 +24,7 @@ public class DataBase {
 
 		//예외처리 2가지 방법: try~catch(직접처리),throws~~(다른곳에서 처리:예외던지기)
 		Connection conn=null;
-		String url="jdbc:oracle:thin:@locallhost:1521xe";
+		String url="jdbc:oracle:thin:@localhost:1521:xe";
 		String user="hk5";
 		String password="hk5";
 		try {

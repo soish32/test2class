@@ -66,7 +66,7 @@ public class HkController extends HttpServlet {
 			HkDto dto=dao.getBoard(seq);
 			request.setAttribute("dto", dto);
 			//pageContext.forward("boarddetail.jsp");
-			dispatch("boarddtail.jsp", request,response);
+			dispatch("boarddetail.jsp", request,response);
 		}else if(command.equals("delboard")) {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			boolean isS= dao.delBoard(seq);
@@ -98,14 +98,16 @@ public class HkController extends HttpServlet {
 			String[] seqs=request.getParameterValues("chk");
 			if(seqs==null||seqs.length==0) {
 					 jsForward("HkController.do?command=boardlist","최소하나이상체크하세요",response);
-					}else {
-							boolean isS=dao.muldel(seqs);
-							if(isS) {
-									  jsForward("HkController.do?comman=boardList","여러글을 삭제합니다.",response);
-									  jsForward("HkCotroller.do?command=boardList","여러글삭제실패.",response);
-									  
-							}
-					}
+			}else {
+				boolean isS=dao.muldel(seqs);
+				if(isS) {
+						  jsForward("HkController.do?command=boardlist","여러글을 삭제합니다.",response);
+						  
+				}else {
+						  jsForward("HkCotroller.do?command=boardlist","여러글삭제실패.",response);
+					
+				}
+			}
 			
 		}
 			
