@@ -85,6 +85,12 @@
 			List<LoginDto> list=dao.getAllUserStatus();
 			request.setAttribute("list", list);
 			pageContext.forward("userlist_staus.jsp");
+		}else if(command.equals("roleForm")){
+			int seq= Integer.parseInt(request.getParameter("seq"));
+			LoginDto dto=dao.getUser(seq);
+			request.setAttribute("dto", dto);
+			pageContext.forward("authform.jsp");
+			
 		}
 	%>
 

@@ -115,6 +115,47 @@ public class LoginDao extends DataBase {
 				return dto;
 				
 			}
+			//4.나의정보 수정 기능 구현(address,phone,email수정)
+			public boolean updateUser(LoginDto dto) {
+				int count=0;
+				Connection conn=null;
+				PreparedStatement psmt=null;
+				String sql="UPDATE USERlNFO SET ADDRESS=?,PHONE=?,EMAL=?, WHERE SEQ=?";
+				try {
+					conn=getConnection();
+					psmt=conn.prepareStatement(sql);
+					psmt.setString(1, dto.getAddress());
+					psmt.setString(2, dto.getPhone());
+					psmt.setString(3, dto.getEmail());
+					psmt.setInt(4, dto.getSeq());
+					count=psmt.executeUpdate();
+				} catch (SQLException e) {
+					log("JDBC","updateUser()",e);
+				}finally {
+					close(null,psmt,conn);
+				}
+				return count>0?true:false;
+			}
+			//회원탈퇴기능 구현 (enabled를'N'으로 수정
+			//          --->getLogin():로그인시 쿼리 를 수정해야됨)
+			public boolean delUser(int seq) {
+				int count=0;
+				Connection conn=null;
+				PreparedStatement psmt=null;
+				String sql="UPDATE USERlNFO SET ENABLED='N' WHERE SEQ=?";
+				
+				try {
+					conn=getConnection();
+					psmt=conn.prepareStatement(sql);
+					psmt.setInt(1,seq);
+					count=psmt.executeUpdate();
+				} catch (SQLException e) {
+						  log("JDBC","delUser()",e);
+				}finally {
+					close(null,psmt,conn);
+				}
+				return count>0?true:false;
+			}
 			
 			
 				
@@ -125,6 +166,17 @@ public LoginDto idChk(String id) {
 	LoginDto dto=new LoginDto();
 	Connection conn=null;
 	return dto;
+}
+public List<LoginDto> getAllUserStatus(){
+	List<LoginDto>list=new ArrayList<>();
+	return list;
+	
+}
+
+public LoginDto getUser(int seq) {
+	LoginDto dto=new LoginDto();
+	return dto;
+	
 }
 }
 	
