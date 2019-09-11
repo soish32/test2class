@@ -7,7 +7,7 @@
 <head>
 <meta http-equiv="COntent-Type" content= "text/html; charsetUTF-8">
 
-<title>Insert title here</title>
+<title></title>
 </head>
 <body>
 
