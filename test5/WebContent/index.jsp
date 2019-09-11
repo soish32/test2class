@@ -10,9 +10,10 @@
 <title>로그인화면</title>
 <script type="text/javascript">
 		 function regist(){
-			 location.href="loginController.jsp?"command=regist";
-			 
-		 }
+			 location.href="loginController.jsp?command=regist";
+		 
+		}
+		 
 </script>
 </head>
 <body>
@@ -29,8 +30,9 @@
 				<td><input type="password" name="password" /></td>
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="로그인" /> <input
-					type="button" value="회원가입" onclick="regist()" />
+				<td colspan="2">
+				<input type="submit" value="로그인" /> 
+					<input type="button" value="회원가입" onclick="regist()"/>
 			  </td>
 			</tr>
 		</table>
