@@ -1,4 +1,4 @@
-<%@page import="java.util.List" %>
+<%@page import="java.util.List"%>
 <%@page import="test5.LoginDao"%>
 <%@page import="test5.LoginDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -97,12 +97,13 @@
 			boolean isS=dao.updateUserRole(seq,role);
 			if(isS){
 				      %>
-				      <script type="text/javascript">
+	<script type="text/javascript">
 				      alert("회원등급을 수정했습니다.");
 				      location.href="loginController.jsp?"command=alluserlist";
 			}
+		}
 				</script>
-				<%
+	<%
 		}else{
 				request.setAttribute("msg", "회원등급변경실패");
 				pageContext.forward("error.jsp");
@@ -113,9 +114,37 @@
 			LoginDto dto=dao.getInfo(seq);
 			request.setAttribute("dto", dto);
 			pageContext.forward("userupdate.jsp");
+		}else if(command.equals("updateuser")){
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			String address=request.getParameter("address");
+			String phone=request.getParameter("phone");
+			String email=request.getParameter("email");
 			
+			boolean isS=dao.updateUser(new LoginDto(seq,address,phone,email));
+			if(isS){
+					%>
+					<script type="text/javascript">
+					alert("나의정보를 수정함");
+					location.href="loginController.jsp?command=userInfo&seq=<%=seq%>";
+				</script>
+				<%
+		}else{
+					request.setAttribute("msg","나의정보수정실패");
+					pageContext.forward("error.jsp");
+			}
+		}else if(command.equals("delUser")){
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			boolean isS=dao.delUser(seq);
+			if(isS){
+					session.invalidate();
+					response.sendRedirect("index.jsp");
+			}else{
+					request.setAttribute("msg", "탈퇴에실패했습니다.");
+					pageContext.forward("error.jsp");
+			}
 		}
+		%>
 	
-%>
+
 </body>
 </html>

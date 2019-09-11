@@ -14,7 +14,11 @@
 <body>
 <%
 	LoginDto dto=(LoginDto)request.getAttribute("dto");
-
 %>
+<h1>등급변경</h1>
+<form action="loginController.jsp" method="post">
+
+
+</form>
 </body>
 </html>

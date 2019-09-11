@@ -165,10 +165,49 @@ public class LoginDao extends DataBase {
 public LoginDto idChk(String id) {
 	LoginDto dto=new LoginDto();
 	Connection conn=null;
+	PreparedStatement psmt=null;
+	ResultSet rs=null;
+	String sql="SELECT ID FROM USERlNFO WHERE ID=?";
+	try {
+		conn=getConnection();
+		psmt=conn.prepareStatement(sql);
+		rs=psmt.executeQuery();
+		while(rs.next()) {
+			dto.setId(rs.getString(1));
+			System.out.println(dto);
+		}
+	} catch (SQLException e) {
+			 log("JDBC","idChk()",e);
+		e.printStackTrace();
+	}finally {
+		close(rs,psmt,conn);
+	}
 	return dto;
+	
 }
 public List<LoginDto> getAllUserStatus(){
 	List<LoginDto>list=new ArrayList<>();
+	Connection conn=null;
+	PreparedStatement psmt=null;
+	ResultSet rs=null;
+	String sql="SELECT SEQ,ID, NAME ,ADDRESS, PHONE ,EMAL , ENABLED , ROLE , REGDATE"
+			+"FROM USERlNFO";
+			
+			try {
+				conn=getConnection();
+				psmt=conn.prepareStatement(sql);
+				rs=psmt.executeQuery();			
+				
+					while(rs.next()) {
+						LoginDto dto=new LoginDto();
+						dto.setSeq(rs.getInt(1));
+						dto.setId(rs.getString(2));
+						dto.setName(rs.getString(3));
+						dto.setPassword(rs.getString(4));
+					}
+				} catch (SQLException e) {
+				e.printStackTrace();
+			}	
 	return list;
 	
 }
