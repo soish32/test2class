@@ -48,58 +48,50 @@ function idChk(){
 </script>
 </head>
 <body>
-<h1>회원가입</h1>
-<form action="loginController.jsp" method="post">
-<input type="hidden"name="command" value="insertuser"/>
-<table border="1">
-		 <tr>
-		 	 <th>아이디</th>
-		 	 <td>
-		 	 	 <input type="text" name="id"class="n"/>
-		 	 	 <input type="button"value="중복체크" onclick="idChk()"/>
-		 	 	 </td>
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 	  	<th>이름</th>
-		 	 <td><input type="text" name="name"/></td>
-		 	</tr>
-		 	 <tr>
-		 	 	<th>패스워드</th>
-		 	 <td><input type="password" name="password"/></td>
-		 	
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 	  	<th>패스워드확인</th>
-		 	 <td><input type="password" name="password2"/></td>
-		 	
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 	  	<th>주소</th>
-		 	 <td><input type="text" name="address"/></td>
-		 	
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 	  	<th>전화번호</th>
-		 	 <td><input type="tel" name="phone"/></td>
-		 	
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 	  	<th>이메일</th>
-		 	 <td><input type="email" name="email"/></td>
-		 	
-		 	 	 </tr>
-		 	 	 <tr>
-		 	 
-		 	 
-		 	 
-		 	 
-		 	 
+	<h1>회원가입</h1>
+	<form action="loginController.jsp" method="post">
+		<input type="hidden" name="command" value="insertuser" />
+		<table border="1">
+			<tr>
+				<th>아이디</th>
+				<td><input type="text" name="id" class="n" /> <input
+					type="button" value="중복체크" onclick="idChk()" /></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><input type="text" name="name" /></td>
+			</tr>
+			<tr>
+				<th>패스워드</th>
+				<td><input type="password" name="password" /></td>
+
+			</tr>
+			<tr>
+				<th>패스워드확인</th>
+				<td><input type="password" name="password2" /></td>
+
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td><input type="text" name="address" /></td>
+
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td><input type="tel" name="phone" /></td>
+
+			</tr>
+			<tr>
+				<th>이메일</th>
+				<td><input type="email" name="email" /></td>
+
+			</tr>
+			<tr>
+				<td colspan="2"><input type="submit" value="가입완료" /></td>
+			</tr>
+		</table>
 
 
-
-</table>
-
-
-</form>
+	</form>
 </body>
 </html>
