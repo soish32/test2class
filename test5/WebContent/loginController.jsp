@@ -91,8 +91,31 @@
 			request.setAttribute("dto", dto);
 			pageContext.forward("authform.jsp");
 			
+		}else if(command.equals("authchange")){
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			String role=request.getParameter("role");
+			boolean isS=dao.updateUserRole(seq,role);
+			if(isS){
+				      %>
+				      <script type="text/javascript">
+				      alert("회원등급을 수정했습니다.");
+				      location.href="loginController.jsp?"command=alluserlist";
+			}
+				</script>
+				<%
+		}else{
+				request.setAttribute("msg", "회원등급변경실패");
+				pageContext.forward("error.jsp");
+			
+			}
+		}else if(command.equals("userInfo")){
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			LoginDto dto=dao.getInfo(seq);
+			request.setAttribute("dto", dto);
+			pageContext.forward("userupdate.jsp");
+			
 		}
-	%>
-
+	
+%>
 </body>
 </html>

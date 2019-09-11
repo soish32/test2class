@@ -176,6 +176,11 @@ public List<LoginDto> getAllUserStatus(){
 public LoginDto getUser(int seq) {
 	LoginDto dto=new LoginDto();
 	return dto;
+}
+	
+	public boolean updateUserRole(int seq,String role) {
+		int count=0;
+		return count>0?true:false;
 	
 }
 }
