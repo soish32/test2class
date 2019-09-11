@@ -55,7 +55,7 @@ function idChk(){
 			<tr>
 				<th>아이디</th>
 				<td><input type="text" name="id" class="n" /> <input
-					type="button" value="중복체크" onclick="idChk()" /></td>
+					type="button" value="중복체크" onclick="idChk()"/></td>
 			</tr>
 			<tr>
 				<th>이름</th>

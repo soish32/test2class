@@ -21,7 +21,7 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		String sql="lNSERT lNTO USERlNFO VALUES("
-				+"USERlNFO_SEQ NEXTVAL,?,?,?,?'Y','USER',SYSDATE)";
+				+" USERlNFO_SEQ NEXTVAL,?,?,?,?'Y','USER',SYSDATE) ";
 
 		try {
 			conn=getConnection();
@@ -161,13 +161,13 @@ public class LoginDao extends DataBase {
 
 
 
-
+//아이디 중복 체크 기능 구현 
 	public LoginDto idChk(String id) {
 		LoginDto dto=new LoginDto();
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT ID FROM USERlNFO WHERE ID=?";
+		String sql=" SELECT ID FROM USERlNFO WHERE ID=? ";
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);

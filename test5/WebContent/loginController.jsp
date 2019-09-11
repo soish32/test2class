@@ -99,7 +99,7 @@
 				      %>
 	<script type="text/javascript">
 				      alert("회원등급을 수정했습니다.");
-				      location.href="loginController.jsp?"command=alluserlist";
+				      location.href="loginController.jsp?command=alluserlist";
 			
 				</script>
 	<%
