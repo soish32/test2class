@@ -57,7 +57,7 @@
 				
 			}
 			function delUser(seq){
-				location.href="loginCotroller.jsp?command=delUser&seq="+seq;
+				location.href="loginController.jsp?command=delUser&seq="+seq;
 			}
 </script>
 </body>

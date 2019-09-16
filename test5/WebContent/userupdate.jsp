@@ -19,7 +19,7 @@
 		LoginDto dto = (LoginDto) request.getAttribute("dto");
 	%>
 	<h1>나의정보수정</h1>
-	<form action="loginCotroller.jsp" method="post">
+	<form action="loginController.jsp" method="post">
 		<input type="hidden" name="command" value="updateuser" /> <input
 			type="hidden" name="seq" value="<%=dto.getSeq()%>" />
 		<table border="1">
