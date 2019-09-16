@@ -43,7 +43,7 @@ function idChk(){
 	var id=document.getElementsByName("id")[0].value;
 	//open("url","title","창의 속성 설정")
 	window.open("loginController.jsp?command=idChk&id="+id,"",
-			"width=300px,height=300px");
+					   "width=300px,height=300px");
 }
 </script>
 </head>
@@ -54,8 +54,9 @@ function idChk(){
 		<table border="1">
 			<tr>
 				<th>아이디</th>
-				<td><input type="text" name="id" class="n" /> <input
-					type="button" value="중복체크" onclick="idChk()"/></td>
+					<td	>
+					<input type="text" name="id" class="n" /> 
+					<input type="button" value="중복체크" onclick="idChk()">				
 			</tr>
 			<tr>
 				<th>이름</th>
@@ -87,7 +88,10 @@ function idChk(){
 
 			</tr>
 			<tr>
-				<td colspan="2"><input type="submit" value="가입완료" /></td>
+				<td colspan="2">
+				<input type="submit" value="가입완료" />
+			
+		</td>
 			</tr>
 		</table>
 

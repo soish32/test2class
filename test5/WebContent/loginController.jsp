@@ -79,8 +79,7 @@
 			String id=request.getParameter("id");
 			LoginDto dto=dao.idChk(id);
 			request.setAttribute("dto", dto);
-			pageContext.forward("idchkform.jsp");
-			
+			pageContext.forward("idchk.form.jsp");
 		}else if(command.equals("alluserstatus")){
 			List<LoginDto> list=dao.getAllUserStatus();
 			request.setAttribute("list", list);
@@ -112,12 +111,18 @@
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			LoginDto dto=dao.getInfo(seq);
 			request.setAttribute("dto", dto);
+			pageContext.forward("user_info.jsp");
+		}else if(command.equals("updateForm")){
+			int seq=Integer.parseInt(request.getParameter("seq"));
+			LoginDto dto=dao.getInfo(seq);
+			request.setAttribute("dto", dto);
 			pageContext.forward("userupdate.jsp");
 		}else if(command.equals("updateuser")){
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			String address=request.getParameter("address");
 			String phone=request.getParameter("phone");
 			String email=request.getParameter("email");
+			
 			
 			boolean isS=dao.updateUser(new LoginDto(seq,address,phone,email));
 			if(isS){
@@ -142,8 +147,6 @@
 					pageContext.forward("error.jsp");
 			}
 		}
-		%>
-	
-
+%>
 </body>
 </html>

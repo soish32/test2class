@@ -171,6 +171,7 @@ public class LoginDao extends DataBase {
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
+			psmt.setString(1,id);
 			rs=psmt.executeQuery();
 			while(rs.next()) {
 				dto.setId(rs.getString(1));
