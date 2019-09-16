@@ -13,11 +13,11 @@
 		window.onload=function(){
 			var id=opener.document.getElementsByName("id")[0].value;
 //현재페이지를 열어준 부모페이지.문서에서 name속성의값이 id인 엘리먼트를구해서. 입력값을얻어옴
-			 document.getElementsByName("id")[0].value=id
+			 document.getElementsByName("id")[0].value=id;
+		}
 		
-		
-		function kk(bool){
-			var parentpage=opener.document.getElemenetsByName("id")[0];
+		function kk(bool){                 
+			var parentPage=opener.document.getElementsByName("id")[0];
 			var val=document.getElementsByName("id")[0].value;
 			if(bool){
 					  opener.document.getElementsByName("name")[0].focus();

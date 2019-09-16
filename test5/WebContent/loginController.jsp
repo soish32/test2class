@@ -36,19 +36,18 @@
 			String phone = request.getParameter("phone");
 			String email = request.getParameter("email");
 
-			boolean isS = dao
-					.insertUser(new LoginDto(0, id, name, password, address, phone, email, null, null, null));
+			boolean isS = dao.insertUser(new LoginDto(0, id, name, password, address, phone, email, null, null, null));
 			if (isS) {
-	%>
-	<script type="text/javascript">
-		alert("회원가입을 축하합니다.");
-		location.href = "index.jsp";
-	</script>
-	<%
-		} else {
-				request.setAttribute("msg", "회원가입실패");
-				pageContext.forward("error.jsp");
-			}
+				%>
+				<script type="text/javascript">
+					alert("회원가입을 축하합니다.");
+					location.href = "index.jsp";
+				</script>
+				<%
+				} else {
+					request.setAttribute("msg", "회원가입실패");
+					pageContext.forward("error.jsp");
+				}
 
 		} else if (command.equals("login")) {
 			String id = request.getParameter("id");
@@ -64,7 +63,7 @@
 
 				session.setAttribute("ldto", ldto);
 				session.setMaxInactiveInterval(10 * 60);
-				if(ldto.getRole().toUpperCase().equals("ADMlN")){
+				if(ldto.getRole().toUpperCase().equals("ADMIN")){
 						   response.sendRedirect("admin_main.jsp");
 				}else if(ldto.getRole().toUpperCase().equals("USER")){
 					response.sendRedirect("user_main.jsp");
@@ -79,7 +78,7 @@
 			String id=request.getParameter("id");
 			LoginDto dto=dao.idChk(id);
 			request.setAttribute("dto", dto);
-			pageContext.forward("idchk.form.jsp");
+			pageContext.forward("idchkform.jsp");
 		}else if(command.equals("alluserstatus")){
 			List<LoginDto> list=dao.getAllUserStatus();
 			request.setAttribute("list", list);

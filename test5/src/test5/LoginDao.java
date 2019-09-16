@@ -20,18 +20,18 @@ public class LoginDao extends DataBase {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="lNSERT lNTO USERlNFO VALUES("
-				+" USERlNFO_SEQ NEXTVAL,?,?,?,?'Y','USER',SYSDATE) ";
+		String sql="INSERT INTO USERINFO VALUES("
+				+" USERINFO_SEQ.NEXTVAL,?,?,?,?,?,'Y','USER',SYSDATE,?) ";
 
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
 			psmt.setString(1,dto.getId());
-			psmt.setString(2, dto.getName());
-			psmt.setString(3, dto.getPassword());
-			psmt.setString(4, dto.getAddress());
-			psmt.setString(5, dto.getPhone());
-			psmt.setString(6, dto.getEmail());
+			psmt.setString(2, dto.getPassword());
+			psmt.setString(3, dto.getAddress());
+			psmt.setString(4, dto.getPhone());
+			psmt.setString(5, dto.getEmail());
+			psmt.setString(6, dto.getName());
 			log("3단계 쿼리준비","insertUser()");
 			count=psmt.executeUpdate();
 			log("4단계 쿼리실행","insertUser()");
@@ -50,14 +50,16 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT SEQ,ID,NAME,PASSWORD,ADDRESS,PHONE,EMAL"
-				+"ENABLED,ROLE,REGDATE"
-				+"FROM USERlNFO WHERE ID=? AND PASSWORD=? AND ENABLED='Y'";
+		String sql="SELECT SEQ,ID,NAME,PASSWORD,ADDRESS,PHONE,EMAIL,"
+				+" ENABLED,ROLE,REGDATE "
+				+" FROM USERINFO WHERE ID=? AND PASSWORD=? AND ENABLED='Y'";
 		try {
-			conn=getConnection();
+			conn=getConnection();//2단계 DB연결
+			psmt=conn.prepareStatement(sql);//3단계 쿼리준비
 			psmt.setString(1, id);
 			psmt.setString(2, passwrod);
 			log("3단계 쿼리준비","getLogin()");
+			rs=psmt.executeQuery();
 			log("4단계 쿼리실행","getLogin()");
 			while(rs.next()) {
 				dto.setSeq(rs.getInt(1));
@@ -167,7 +169,7 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql=" SELECT ID FROM USERlNFO WHERE ID=? ";
+		String sql=" SELECT ID FROM USERINFO WHERE ID=? ";
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);

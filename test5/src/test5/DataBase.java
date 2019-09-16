@@ -8,8 +8,8 @@ import java.sql.SQLException;
 
 public class DataBase {
 	public DataBase(){
-		try {
-			Class.forName("oralce.jdbc.driver.OracleDriver");
+		try {              
+			Class.forName("oracle.jdbc.driver.OracleDriver");
 			log("1단계 드라이버로딩","DataBase()");
 			
 		} catch (ClassNotFoundException e) {

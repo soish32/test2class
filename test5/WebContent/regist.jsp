@@ -39,6 +39,7 @@ window.onload=function(){
 		}
 	}
 }
+
 function idChk(){
 	var id=document.getElementsByName("id")[0].value;
 	//open("url","title","창의 속성 설정")
@@ -55,8 +56,8 @@ function idChk(){
 			<tr>
 				<th>아이디</th>
 					<td	>
-					<input type="text" name="id" class="n" /> 
-					<input type="button" value="중복체크" onclick="idChk()">				
+						<input type="text" name="id" class="n" /> 
+						<input type="button" value="중복체크" onclick="idChk()"/>	
 			</tr>
 			<tr>
 				<th>이름</th>
@@ -64,8 +65,8 @@ function idChk(){
 			</tr>
 			<tr>
 				<th>패스워드</th>
-				<td><input type="password" name="password" /></td>
 
+				<td><input type="password" name="password" /></td>
 			</tr>
 			<tr>
 				<th>패스워드확인</th>
@@ -89,7 +90,7 @@ function idChk(){
 			</tr>
 			<tr>
 				<td colspan="2">
-				<input type="submit" value="가입완료" />
+				<input type="submit" value="가입완료" /> 
 			
 		</td>
 			</tr>
