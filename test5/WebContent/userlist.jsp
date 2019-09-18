@@ -14,7 +14,7 @@
 <title></title>
 </head>
 <body>
-	<%
+<%
 	List<LoginDto>list=(List<LoginDto>)request.getAttribute("list");
 %>
 	<h1>회원리스트조회</h1>
@@ -32,8 +32,10 @@
 			<td><%=dto.getSeq()%></td>
 			<td><%=dto.getId()%></td>
 			<td><%=dto.getName()%></td>
-			<td><%=dto.getRole()%>
-				<button onclick="auth(<%=dto.getSeq()%>)">변경</button></td>
+			<td>
+				<%=dto.getRole()%>
+				<button onclick="auth(<%=dto.getSeq()%>)">변경</button>
+			</td>
 			<td><%=dto.getRegdate()%></td>
 		</tr>
 		<%

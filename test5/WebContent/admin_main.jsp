@@ -23,16 +23,16 @@ response.setDateHeader("Expires", 0L);//Do not cache in proxy server
 	<h1>관리자페이지</h1>
 	<%
 		if(ldto==null){
-//		response.sendRedirect("index.jsp");
-//		pageContext.forward("index.jsp");
+//	response.sendRedirect("index.jsp");
+	pageContext.forward("index.jsp");
 		}else{
 			%>
 	<div><%=ldto.getId() %>님반갑습니다.(등급:<%=ldto.getRole() %>) <a
-			href="LoginController.jsp?command=logout">로그아웃</a>
+			href="loginController.jsp?command=logout">로그아웃</a>
 	</div>
 	<ul>
-		<li><a href="loginController.jsp?command=alluserstatus">회원정보상태</a>
-		<li><a href="loginController.jsp?command=alluserstatus">회원정보목록상태</a>
+		<li><a href="loginController.jsp?command=alluserstatus">회원상태정보조회</a>
+		<li><a href="loginController.jsp?command=alluserlist">회원정보목록조회</a>
 	</ul>
 	<%
 	

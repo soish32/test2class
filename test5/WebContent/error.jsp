@@ -27,7 +27,7 @@
 	   <%
 	   
    }else{
-	   		if(ldto.getRole().equals("ADMlN")){
+	   		if(ldto.getRole().equals("ADMIN")){
 	   			response.sendRedirect("admin_main.jsp");
 	   			
 	   		}else if(ldto.getRole().equals("USER")){

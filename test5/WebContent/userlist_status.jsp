@@ -40,11 +40,10 @@ response.setDateHeader("Expires", 0L);//Do not cache in proxy server
 				</tr>
 			</c:when>
 			<c:otherwise>
-				<c:forEach items="{list}" var="dto">
+				<c:forEach items="${list}" var="dto">
 					<tr>
 						<td>${dto.seq }</td>
 						<td>${dto.id }</td>
-						<td>${dto.name }</td>
 						<td>${dto.name }</td>
 						<td>${dto.address }</td>
 						<td>${dto.phone }</td>

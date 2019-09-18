@@ -50,11 +50,12 @@
 				}
 
 		} else if (command.equals("login")) {
+		
 			String id = request.getParameter("id");
 			String password = request.getParameter("password");
-
+			
 			LoginDto ldto = dao.getLogin(id, password);
-
+		
 			if (ldto == null || ldto.getId() == null) {
 				request.setAttribute("msg", "아이디나 패스워드를 확인하세요");
 				pageContext.forward("error.jsp");
@@ -65,8 +66,11 @@
 				session.setMaxInactiveInterval(10 * 60);
 				if(ldto.getRole().toUpperCase().equals("ADMIN")){
 						   response.sendRedirect("admin_main.jsp");
-				}else if(ldto.getRole().toUpperCase().equals("USER")){
-					response.sendRedirect("user_main.jsp");
+					}else if(ldto.getRole().toUpperCase().equals("USER")){
+						response.sendRedirect("user_main.jsp");
+					}else if(ldto.getRole().toUpperCase().equals("MANAGER")){
+						response.sendRedirect("user_main.jsp");
+						
 					
 				}
 
@@ -82,13 +86,16 @@
 		}else if(command.equals("alluserstatus")){
 			List<LoginDto> list=dao.getAllUserStatus();
 			request.setAttribute("list", list);
-			pageContext.forward("userlist_staus.jsp");
+			pageContext.forward("userlist_status.jsp");
+		}else if(command.equals("alluserlist")){
+			List<LoginDto> list=dao.getAllUserList();
+			request.setAttribute("list", list);
+			pageContext.forward("userlist.jsp");
 		}else if(command.equals("roleForm")){
 			int seq= Integer.parseInt(request.getParameter("seq"));
 			LoginDto dto=dao.getUser(seq);
 			request.setAttribute("dto", dto);
 			pageContext.forward("authform.jsp");
-			
 		}else if(command.equals("authchange")){
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			String role=request.getParameter("role");

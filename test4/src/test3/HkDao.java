@@ -117,8 +117,8 @@ public class HkDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE"
-				+"FROM HKBOARD WHERE SEQ=?";
+		String sql="SELECT SEQ,ID,NAME,TITLE,CONTENT,REGDATE "
+				+" FROM HKBOARD WHERE SEQ=?";
 
 		try {
 			conn=getConnection();

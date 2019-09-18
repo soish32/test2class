@@ -24,7 +24,7 @@ response.setDateHeader("Expires", 0L);//Do not cache in proxy server
 			 pageContext.forward("index.jsp");
 			 
 	}else{
-			if(ldto.getRole().equals("ADMlN")){
+			if(ldto.getRole().equals("ADMIN")){
 				out.print("<a href='admin_main.jsp'>메인</a>");
 				
 			}else if(ldto.getRole().equals("USER")){

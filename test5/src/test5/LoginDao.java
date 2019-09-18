@@ -89,8 +89,8 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql=" SELECT SEQ,ID,NAME,ADDRESS,PHONE,EMAL,REGDATE "
-				+"FROM USERlNFO WHERE SEQ=?";
+		String sql=" SELECT SEQ,ID,NAME,ADDRESS,PHONE,EMAIL,REGDATE "
+				+"FROM USERINFO WHERE SEQ=?";
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -122,7 +122,7 @@ public class LoginDao extends DataBase {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="UPDATE USERlNFO SET ADDRESS=?,PHONE=?,EMAL=?, WHERE SEQ=?";
+		String sql="UPDATE USERINFO SET ADDRESS=?,PHONE=?,EMAIL=? WHERE SEQ=?";
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
@@ -144,7 +144,7 @@ public class LoginDao extends DataBase {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="UPDATE USERlNFO SET ENABLED='N' WHERE SEQ=?";
+		String sql="UPDATE USERINFO SET ENABLED='N' WHERE SEQ=?";
 
 		try {
 			conn=getConnection();
@@ -189,12 +189,13 @@ public class LoginDao extends DataBase {
 
 	}
 	public List<LoginDto> getAllUserStatus(){
+		System.out.println("안녕");
 		List<LoginDto>list=new ArrayList<>();
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT SEQ,ID, NAME ,ADDRESS, PHONE ,EMAL , ENABLED , ROLE , REGDATE"
-				+"FROM USERlNFO";
+		String sql="SELECT SEQ,ID, NAME ,ADDRESS, PHONE ,EMAIL , ENABLED , ROLE , REGDATE"
+				+" FROM USERINFO";
 
 		try {
 			conn=getConnection();
@@ -228,13 +229,14 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT SEQ,ID ,NAME,ROLE,REGDATE"
-				+"FROM USElNFO WHERE ENABLED='Y'";
+		String sql="SELECT SEQ,ID,ROLE,NAME, REGDATE "
+				+" FROM USERINFO WHERE ENABLED='Y'";
 
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
-			while(rs.next()) {
+			rs=psmt.executeQuery();
+				while(rs.next()) {
 				LoginDto dto=new LoginDto();
 				dto.setSeq(rs.getInt(1));
 				dto.setId(rs.getString(2));
@@ -259,23 +261,27 @@ public class LoginDao extends DataBase {
 		Connection conn=null;
 		PreparedStatement psmt=null;
 		ResultSet rs=null;
-		String sql="SELECT ID, NAME ,ADDRESS,PHONE,EMAL,ENABLED,ROLE,REGDATE"
-				+"FROM USERlNFO WHERE SEQ=?";
+		String sql="SELECT SEQ,ID, NAME ,ADDRESS,PHONE,EMAIL,ENABLED,ROLE,REGDATE "
+				+" FROM USERINFO WHERE SEQ=?";
 
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
+			psmt.setInt(1, seq);
 			rs=psmt.executeQuery();
 			while(rs.next()) {
 				dto.setSeq(rs.getInt(1));
-				dto.setName(rs.getString(2));
-				dto.setAddress(rs.getString(3));
-				dto.setPhone(rs.getString(4));
-				dto.setEmail(rs.getString(5));
-				dto.setRole(rs.getString(6));
-				dto.setRegdate(rs.getDate(7));
-				System.out.println(dto);
+				dto.setId(rs.getString(2));
+				dto.setName(rs.getString(3));
+				dto.setAddress(rs.getString(4));
+				dto.setPhone(rs.getString(5));
+				dto.setEmail(rs.getString(6));
+				dto.setEnabled(rs.getString(7));
+				dto.setRole(rs.getString(8));
+				dto.setRegdate(rs.getDate(9));
 			}
+				System.out.println(dto);
+			
 		} catch (SQLException e) {
 			log("JDBC","getUser()",e);
 		}finally {
@@ -288,7 +294,7 @@ public class LoginDao extends DataBase {
 		int count=0;
 		Connection conn=null;
 		PreparedStatement psmt=null;
-		String sql="UPDATE USERlNFO SET ROLE=? WHERE SEQ=?";
+		String sql="UPDATE USERINFO SET ROLE=? WHERE SEQ=?";
 		try {
 			conn=getConnection();
 			psmt=conn.prepareStatement(sql);
