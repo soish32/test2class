@@ -24,7 +24,7 @@ public class HkDao extends DataBase {
 	}
 
 	public List<HkDto> getAllList() {
-		List<HkDto> list= new ArrayList();
+		List<HkDto> list=new ArrayList<>();
 		String url= "jdbc:oracle:thin:@localhost:1521:xe";
 		String user ="hk5";
 		String password = "hk5";
