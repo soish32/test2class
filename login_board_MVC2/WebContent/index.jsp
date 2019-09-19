@@ -10,6 +10,6 @@
 <title>메인화면</title>
 </head>
 <body>
-<a href="HkController.do?command=boardlist">글목록조회</a>
+<a href="HkContrlloer.do?command=boardlist">글목록조회</a>
 </body>
 </html>

@@ -16,7 +16,7 @@
 %>
 <body>
 	<h1>게시글수정하기</h1>
-	<form action="HkController.do" method="post">
+	<form action="HkContrlloer.do" method="post">
 		<input type="hidden" name="command" value="boardupdate" /> <input
 			type="hidden" name="seq" value="<%=dto.getSeq() %>" />
 		<table border="1">

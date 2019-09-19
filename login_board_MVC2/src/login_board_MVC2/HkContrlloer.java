@@ -52,7 +52,7 @@ public class HkContrlloer extends HttpServlet {
 			if(isS) {
 
 				response.sendRedirect("HkController.do?command=boardlist");
-				jsForward("HkController.do?command=boardlist","글 성공적으로 등록했습니다",response);
+				jsForward("HkContrlloer.do?command=boardlist","글 성공적으로 등록했습니다",response);
 			}else {
 
 				jsForward("insertboard.jsp","글등록에실패했습니다",response);
@@ -69,9 +69,9 @@ public class HkContrlloer extends HttpServlet {
 			int seq=Integer.parseInt(request.getParameter("seq"));
 			boolean isS=dao.delBoard(seq);
 			if(isS) {
-				jsForward("HkController.do?command=boardlist","해당글을삭제합니다",response);
+				jsForward("HkContrlloer.do?command=boardlist","해당글을삭제합니다",response);
 			}else {
-				jsForward("HkController.do?command=boarddetail&seq"+seq,"해당글삭제실패",response);
+				jsForward("HkContrlloer.do?command=boarddetail&seq"+seq,"해당글삭제실패",response);
 
 			}
 		}else if(command.equals("updateform")) {
@@ -88,9 +88,9 @@ public class HkContrlloer extends HttpServlet {
 
 			boolean isS=dao.upateBoard(new HkDto(seq,title,content));
 			if(isS) {
-				jsForward("HkController.do?command=boarddtail&seq="+seq,"글수정성고오옹!",response);
+				jsForward("HkContrllero.do?command=boarddtail&seq="+seq,"글수정성고오옹!",response);
 			}else {
-				jsForward("HkController.do?command=boardupdate&seq="+seq,"글수정실패에에",response);
+				jsForward("HkContrllero.do?command=boardupdate&seq="+seq,"글수정실패에에",response);
 			}
 		}else if(command.equals("muldel")) {
 			String[]seqs=request.getParameterValues("chk");
@@ -99,10 +99,10 @@ public class HkContrlloer extends HttpServlet {
 			}else {
 					boolean isS=dao.muldel(seqs);
 					if(isS) {
-								jsForward("HkController.do?command=boardlist","여러글을삭제합니다",response);
+								jsForward("HkContrllero.do?command=boardlist","여러글을삭제합니다",response);
 					}else {
 						
-								jsForward("HKController.do?command=boardlist","여러글을삭제에실패했습니다",response);
+								jsForward("HKContrllero.do?command=boardlist","여러글을삭제에실패했습니다",response);
 					}
 			}
 		}
