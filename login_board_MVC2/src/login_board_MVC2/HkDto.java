@@ -23,11 +23,11 @@ public class HkDto {
 	}
 
 
-	public HkDto(int seq, String id, Date regdate) {
+	public HkDto(int seq, String id, String content) {
 		super();
 		this.seq = seq;
 		this.id = id;
-		this.regdate = regdate;
+		this.content = content;
 	}
 	public HkDto(String id, String name, String title, String content) {
 		super();
