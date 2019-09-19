@@ -46,8 +46,8 @@ public class HkContrlloer extends HttpServlet {
 		HkDao dao= new HkDao();
 
 		if(command.equals("boardlist")) {
-		List<HkDto> list= dao.getAllList();
-					request.setAttribute("list", list);
+			List<HkDto> list= dao.getAllList();
+			request.setAttribute("list", list);
 			dispatch("boardlist.jsp",request,response);
 			//                                  pageContext.forward("boardlist.jsp");
 			//dopost()
@@ -72,23 +72,39 @@ public class HkContrlloer extends HttpServlet {
 			HkDto dto= dao.getBoard(seq);
 			request.setAttribute("dto", dto);
 			//pageContext.forward("boarddil.jsp")
-			dispatch("boarddetail.jsp",request, response);
 			dispatch("boarddetail.jsp",request,response);
-			
+
+		}else if(command.equals("delboard"));
+		int seq=Integer.parseInt(request.getParameter("seq"));
+		boolean isS=dao.delBoard(seq);
+		if(isS) {
+
+			jsForward("HkController.do?command=boardlist","해당글을삭제합니다",response);
+
+			jsForward("HkController.do?command=boarddetail&seq="+seq,"해당글삭제실패",response);
+		}else {
 		}
+
 	}
 
 
 
 	private void jsForward(String string, String string2, HttpServletResponse response2) {
 		// TODO Auto-generated method stub
-
 	}
+
 
 
 	private void dispatch(String string, HttpServletRequest request, HttpServletResponse response) {
 		// TODO Auto-generated method stub
-
 	}
-
 }
+
+
+
+
+
+
+
+
+
