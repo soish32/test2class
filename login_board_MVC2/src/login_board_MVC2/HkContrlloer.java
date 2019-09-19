@@ -83,9 +83,14 @@ public class HkContrlloer extends HttpServlet {
 
 			jsForward("HkController.do?command=boarddetail&seq="+seq,"해당글삭제실패",response);
 		}else {
+		
+		}
+			
 		}
 
-	}
+
+		
+	
 
 
 

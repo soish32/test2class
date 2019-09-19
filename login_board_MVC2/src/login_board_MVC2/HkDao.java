@@ -179,6 +179,49 @@ public class HkDao extends DataBase {
 		return count>0?true:false;
 
 	}
+	public boolean muldel(String[]seqs) {
+		boolean isS=true;
+		int[]count=null;
+		Connection conn=null;
+		PreparedStatement psmt=null;
+		String sql="DELETE FROM HKBOARD WHERE SEQ=?";
+		
+		try {
+			conn=getConnection();
+			conn.setAutoCommit(false);
+			psmt=conn.prepareStatement(sql);
+			for(int i=0;i<seqs.length;i++) {
+					  psmt.setString(1, seqs[i]);
+					  psmt.addBatch();
+			}
+			count=psmt.executeBatch();
+			conn.commit();
+		} catch (SQLException e) {
+			try {
+					conn.rollback();
+			} catch (SQLException e1) {
+				
+					e1.printStackTrace();
+			}
+			
+			e.printStackTrace();
+		}finally {
+			
+		}
+		try {
+			conn.setAutoCommit(true);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//화면처리위해서 성공여부를확인 count[-2,-2,-2]
+		for(int i=0;i<count.length;i++) {
+				   if(count[i]!=-2) {
+					   isS=false;
+					   break;
+				   }
+		}
+		return isS;
+	}
 
 	 
 	}
