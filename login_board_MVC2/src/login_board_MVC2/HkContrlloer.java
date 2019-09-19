@@ -72,6 +72,7 @@ public class HkContrlloer extends HttpServlet {
 			HkDto dto= dao.getBoard(seq);
 			request.setAttribute("dto", dto);
 			//pageContext.forward("boarddil.jsp")
+			dispatch("boarddetail.jsp",request, response);
 			dispatch("boarddetail.jsp",request,response);
 			
 		}
