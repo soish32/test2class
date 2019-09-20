@@ -1,3 +1,4 @@
+<%@page import="com.hk.dtos.LoginDto"%>
 <%@page import="com.hk.dtos.HkDto"%>
 
 <%@page import="java.util.List"%>
@@ -29,7 +30,7 @@
 <%
 // 		Object obj=request.getAtrribute("list");
 		List<HkDto>list=(List<HkDto>)request.getAttribute("list");
-
+		LoginDto ldto=(LoginDto)session.getAttribute("ldto");
 %>
 <body>
 	<h1>게시판글목록조회</h1>
@@ -60,7 +61,7 @@
 								HkDto dto=list.get(i);
 							%>
 			<tr>
-				<td><input type="checkbox" name="chk" value="<%=dto.getSeq()%>" /></td>
+				<td><input type="checkbox" name="chk" value="<%=dto.getSeq()%>" <%=ldto.getId().equals(dto.getId())?"":"disabled"%> /></td>
 				<td><%=dto.getSeq() %></td>
 				<td><%=dto.getId()%></td>
 				<td><a href="HkController.do?command=boarddetail&seq=<%=dto.getSeq()%>"><%=dto.getTitle()%></a></td>
