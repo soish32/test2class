@@ -7,7 +7,8 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-public class sqlMapConfig {
+
+public class SqlMapConfig {
 //SqlSessionFactory객체를 구하는 코드를 정의
 	
 	//작업을 하기 위한 객체를 저장할 맴버필드
@@ -24,8 +25,7 @@ public class sqlMapConfig {
 			sqlSessionFactory=new SqlSessionFactoryBuilder().build(reader);
 			reader.close();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
 		}
 		return sqlSessionFactory;
 }

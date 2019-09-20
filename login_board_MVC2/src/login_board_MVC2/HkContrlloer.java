@@ -1,6 +1,7 @@
 package login_board_MVC2;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.util.List;
 
@@ -61,7 +62,7 @@ public class HkContrlloer extends HttpServlet {
 
 		}else if(command.equals("boarddetail")){
 			int seq= Integer.parseInt(request.getParameter("seq"));
-			HkDto dto=dao.getBoard(seq);
+			HkDto dto= dao.getBoard(seq);
 			request.setAttribute("dto", dto);
 			//				pageContext.forward("boarddetail.jsp");
 			dispatch("boarddetail.jsp",request,response);
@@ -86,7 +87,7 @@ public class HkContrlloer extends HttpServlet {
 			String content=request.getParameter("content");
 			int seq=Integer.parseInt(request.getParameter("seq"));
 
-			boolean isS=dao.upateBoard(new HkDto(seq,title,content));
+			boolean isS=dao.updateBoard(new HkDto(seq,title,content));
 			if(isS) {
 				jsForward("HkContrllero.do?command=boarddtail&seq="+seq,"글수정성고오옹!",response);
 			}else {
