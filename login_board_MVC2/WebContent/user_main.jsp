@@ -21,7 +21,7 @@
 </div>
 <ul>
 	<li><a href="LoginController.do?command=userInfo&seq=<%=ldto.getSeq() %>">나의정보조회</a></li>
-
+	<li><a href="HkController.do?command=boardlist">게시글보기</a></li>
 </ul>
 </body>
 </html>

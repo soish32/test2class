@@ -17,7 +17,6 @@
 </script>
 </head>
 <body>
-
 	<h1>로그인</h1>
 	<form action="LoginController.do" method="post">
 		<input type="hidden" name="command" value="login" />
